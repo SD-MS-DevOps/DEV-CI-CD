@@ -9,7 +9,7 @@ on:
       - develop
 
 jobs:
-  build_and_test_MS:
+  build_and_test:
 
     runs-on: ubuntu-latest
 
@@ -25,92 +25,92 @@ jobs:
   #  orders-service
       
       - name: Build orders-service
-        working-directory: Backend(BE)/orders-service
+        working-directory: BE-MS/orders-service
         run: mvn -B package --file pom.xml
 
       - name: Upload JAR file
         uses: actions/upload-artifact@v4
         with:
           name: orders-service
-          path: Backend(BE)/orders-service/target/*.jar
+          path: BE-MS/orders-service/target/*.jar
 
       - uses: actions/download-artifact@v4
         with:
           name: orders-service
-          path: Backend(BE)/orders-service
+          path: BE-MS/orders-service
 
       - name: Display structure of downloaded files
-        run: ls -l  Backend(BE)/orders-service
+        run: ls -l  BE-MS/orders-service
 
       - name: Build Docker image
-        run: docker build --build-arg JAR_FILE=orders-service -t orders-service:latest ./Backend(BE)/orders-service
+        run: docker build --build-arg JAR_FILE=orders-service -t orders-service:latest ./BE-MS/orders-service
           
   # payments-service   
        
       - name: Build payments-service
-        working-directory: Backend(BE)/payments-service
+        working-directory: BE-MS/payments-service
         run: mvn -B package --file pom.xml
 
       - name: Upload payments JAR file
         uses: actions/upload-artifact@v4
         with:
           name: payments-service
-          path: Backend(BE)/payments-service/target/*.jar
+          path: BE-MS/payments-service/target/*.jar
        
       - uses: actions/download-artifact@v4
         with:
           name: payments-service
-          path: Backend(BE)/payments-service
+          path: BE-MS/payments-service
 
       - name: Display structure of downloaded files
-        run: ls -l Backend(BE)/payments-service
+        run: ls -l BE-MS/payments-service
 
       - name: Build Docker image
-        run: docker build --build-arg JAR_FILE=payments-service -t payments-service:latest ./Backend(BE)/payments-service
+        run: docker build --build-arg JAR_FILE=payments-service -t payments-service:latest ./BE-MS/payments-service
   # products-service     
 
       - name: Build products-service
-        working-directory: Backend(BE)/products-service
+        working-directory: BE-MS/products-service
         run: mvn -B package --file pom.xml
 
       - name: Upload products JAR file
         uses: actions/upload-artifact@v4
         with:
             name: products-service
-            path: Backend(BE)/products-service/target/*.jar
+            path: BE-MS/products-service/target/*.jar
 
       - uses: actions/download-artifact@v4
         with:
           name: products-service
-          path: Backend(BE)/products-service
+          path: BE-MS/products-service
 
       - name: Display structure of downloaded files
-        run: ls -l  Backend(BE)/products-service
+        run: ls -l  BE-MS/products-service
 
       - name: Build Docker image
-        run: docker build --build-arg JAR_FILE=products-service -t products-service:latest ./Backend(BE)/products-service
+        run: docker build --build-arg JAR_FILE=products-service -t products-service:latest ./BE-MS/products-service
 
 
   #shipping-service
 
       - name: Build shipping-service
-        working-directory: Backend(BE)/shipping-service
+        working-directory: BE-MS/shipping-service
         run: mvn -B package --file pom.xml
 
       - name: Upload shipping JAR file
         uses: actions/upload-artifact@v4
         with:
               name: shipping-service
-              path: Backend(BE)/shipping-service/target/*.jar
+              path: BE-MS/shipping-service/target/*.jar
 
       - uses: actions/download-artifact@v4
         with:
           name: shipping-service
-          path: Backend(BE)/shipping-service
+          path: BE-MS/shipping-service
 
       - name: Display structure of downloaded files
-        run: ls -l  Backend(BE)/shipping-service
+        run: ls -l  BE-MS/shipping-service
 
       - name: Build Docker image
-        run: docker build -build-arg JAR_FILE=shipping-service -t shipping-service:latest ./Backend(BE)/shipping-service
+        run: docker build -build-arg JAR_FILE=shipping-service -t shipping-service:latest ./BE-MS/shipping-service
 
