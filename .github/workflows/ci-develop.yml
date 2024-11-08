@@ -51,22 +51,19 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: orders-service
-          path: orders-service/target/orders-service-example-0.0.1-SNAPSHOT-spring-boot.jar
-                   
-      - run: ls -l BE-MS/orders-service/target/
+          path: BE-MS/orders-service/target/*.jar
 
-     # - uses: actions/download-artifact@v4
-     #   with:
-     #     name: orders-service
-     #     path: BE-MS/orders-service
-         
+      - uses: actions/download-artifact@v4
+        with:
+          name: orders-service
+          path: BE-MS/orders-service/
+
       - name: Display structure of downloaded files
-        run: |
-          ls -l  BE-MS/orders-service
-          ls -l BE-MS/orders-service/target/ 
+        run: ls -l  BE-MS/orders-service
 
       - name: Build Docker image
         run: docker build -t orders-service:latest ./BE-MS/orders-service
+          
           
   # payments-service   
        
