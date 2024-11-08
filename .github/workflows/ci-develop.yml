@@ -26,13 +26,14 @@ jobs:
       
       - name: Build orders-service
         working-directory: BE-MS/orders-service
-        run: mvn -B package --file pom.xml
-      
+        #run: mvn -B package --file pom.xml
+        run: mvn clean package --file pom.xml
+
       - name: Upload JAR file
         uses: actions/upload-artifact@v4
         with:
           name: orders-service
-          path: BE-MS/orders-service/target/*.jar
+          path: BE-MS/orders-service/target/*.
           run: ls -l BE-MS/orders-service/target/
 
       - uses: actions/download-artifact@v4
@@ -45,7 +46,7 @@ jobs:
         run: |
           ls -l  BE-MS/orders-service
           ls -l BE-MS/orders-service/target/ 
-          
+
       - name: Build Docker image
         run: docker build -t orders-service:latest ./BE-MS/orders-service
           
