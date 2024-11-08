@@ -34,7 +34,7 @@ jobs:
             path: ~/.m2
             key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
             restore-keys: ${{ runner.os }}-m2
-      - name: Build and analyze
+      - name: Build and analicis con sonarcloud
         working-directory: BE-MS/orders-service
         env:
            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
@@ -52,14 +52,14 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: orders-service
-          path: orders-service-example/target/  
+          path: orders-service/target/  
            
       - run: ls -l BE-MS/orders-service/target/
 
       - uses: actions/download-artifact@v4
         with:
           name: orders-service
-          path: BE-MS/orders-service/
+          path: BE-MS/orders-service/target/
       - run: ls -l BE-MS/orders-service/target/
 
       - name: Display structure of downloaded files
