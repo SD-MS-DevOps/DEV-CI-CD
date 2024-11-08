@@ -47,16 +47,17 @@ jobs:
         working-directory: BE-MS/orders-service
         run: mvn -B package --file pom.xml
 
-      - name: Upload JAR file
-        uses: actions/upload-artifact@v4
-        with:
-          name: orders-service
-          path: BE-MS/orders-service/target/*.jar
+    #  - name: Upload JAR file
+     #   uses: actions/upload-artifact@v4
+     #   with:
+     #     name: orders-service
+     #     path: BE-MS/orders-service/target/*.jar
 
-      - uses: actions/download-artifact@v4
-        with:
-          name: orders-service
-          path: BE-MS/orders-service/
+      #- name: Download JAR file
+      #  uses: actions/download-artifact@v4
+      #  with:
+      #    name: orders-service
+      #    path: BE-MS/orders-service/
 
       - name: Display structure of downloaded files
         run: ls -l  BE-MS/orders-service
@@ -75,12 +76,12 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: payments-service
-          path: BE-MS/payments-service/target/payments-service-example-0.0.1-SNAPSHOT-spring-boot.jar
+          path: BE-MS/payments-service/target/*.jar
        
-      #- uses: actions/download-artifact@v4
-       # with:
-       #   name: jar-file
-       #   path: BE-MS/jar-file
+      - uses: actions/download-artifact@v4
+        with:
+          name: jar-file
+          path: BE-MS/jar-file
 
       - name: Display structure of downloaded files
         run: ls -l BE-MS/payments-service
