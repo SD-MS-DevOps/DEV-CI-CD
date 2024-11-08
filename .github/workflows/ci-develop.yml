@@ -3,7 +3,7 @@ name: MS CI/CD
 on:
   push:
     branches:
-      - develop # Cambia esto a tu rama por defecto
+      - develop 
   pull_request:
     branches:
       - develop
@@ -37,13 +37,13 @@ jobs:
       - name: Build and analicis con sonarcloud
         working-directory: BE-MS/orders-service
         env:
-           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=SD-MS-DevOps_DEV-CI-CD         
 
   #  orders-service
       
-      - name: Build orders-service
+      - name: Build and Test orders-service
         working-directory: BE-MS/orders-service
         run: mvn -B package --file pom.xml
 
@@ -59,12 +59,22 @@ jobs:
       #    name: orders-service
       #    path: BE-MS/orders-service/
 
-      - name: Display structure of downloaded files
-        run: ls -l  BE-MS/orders-service
-
-      - name: Build Docker image
-        run: docker build -t orders-service:latest ./BE-MS/orders-service
+      #- name: Build and push Docker image
+       # run: docker build -t orders-service:latest ./BE-MS/orders-service
           
+      
+      - name: Display structure of downloaded files
+        run: ls -l  
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build Container image
+        run: docker build -t ${{ secrets.DOCKER_REPO }}:latest .
+      - name: Publish Docker image
+        run: docker push ${{ secrets.DOCKER_REPO }}
           
   # payments-service   
        
@@ -83,11 +93,10 @@ jobs:
       #    name: jar-file
       #    path: BE-MS/jar-file
 
-      - name: Display structure of downloaded files
-        run: ls -l BE-MS/payments-service
-
       - name: Build Docker image
-        run: docker build -t payments-service:latest ./BE-MS/payments-service
+        run: docker build -t payments-service:latest .
+        #/BE-MS/payments-service
+
   # products-service     
 
       - name: Build products-service
@@ -104,11 +113,9 @@ jobs:
     #      name: products-service
     #      path: BE-MS/products-service
 
-      - name: Display structure of downloaded files
-        run: ls -l  BE-MS/products-service
-
       - name: Build Docker image
-        run: docker build -t products-service:latest ./BE-MS/products-service
+        run: docker build -t products-service:latest .
+        #/BE-MS/products-service
 
 
   #shipping-service
@@ -128,9 +135,7 @@ jobs:
     #      name: shipping-service
     #      path: BE-MS/shipping-service
 
-      - name: Display structure of downloaded files
-        run: ls -l  BE-MS/shipping-service
-
       - name: Build Docker image
-        run: docker build -t shipping-service:latest ./BE-MS/shipping-service
+        run: docker build -t shipping-service:latest .
+        #/BE-MS/shipping-service
 
