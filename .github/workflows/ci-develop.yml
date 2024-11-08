@@ -51,8 +51,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: orders-service
-#          path: BE-MS/orders-service/target/*.jar
-           run: ls -l BE-MS/orders-service/target/
+          path: orders-service-example/target/  
+        run: ls -l BE-MS/orders-service/target/
 
       - uses: actions/download-artifact@v4
         with:
