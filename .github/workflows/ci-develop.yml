@@ -72,16 +72,16 @@ jobs:
         working-directory: BE-MS/payments-service
         run: mvn -B package --file pom.xml
 
-      - name: Upload payments JAR file
-        uses: actions/upload-artifact@v4
-        with:
-          name: payments-service
-          path: BE-MS/payments-service/target/*.jar
+      #- name: Upload payments JAR file
+      #  uses: actions/upload-artifact@v4
+      #  with:
+      #    name: payments-service
+      #    path: BE-MS/payments-service/target/*.jar
        
-      - uses: actions/download-artifact@v4
-        with:
-          name: jar-file
-          path: BE-MS/jar-file
+      #- uses: actions/download-artifact@v4
+      #  with:
+      #    name: jar-file
+      #    path: BE-MS/jar-file
 
       - name: Display structure of downloaded files
         run: ls -l BE-MS/payments-service
@@ -94,15 +94,15 @@ jobs:
         working-directory: BE-MS/products-service
         run: mvn -B package --file pom.xml
 
-      - name: Upload products JAR file
-        uses: actions/upload-artifact@v4
-        with:
-            name: products-service
-            path: BE-MS/products-service/target/*.jar
-      - uses: actions/download-artifact@v4
-        with:
-          name: products-service
-          path: BE-MS/products-service
+    #  - name: Upload products JAR file
+    #    uses: actions/upload-artifact@v4
+    #    with:
+    #        name: products-service
+    #        path: BE-MS/products-service/target/*.jar
+    #  - uses: actions/download-artifact@v4
+    #    with:
+    #      name: products-service
+    #      path: BE-MS/products-service
 
       - name: Display structure of downloaded files
         run: ls -l  BE-MS/products-service
@@ -117,16 +117,16 @@ jobs:
         working-directory: BE-MS/shipping-service
         run: mvn -B package --file pom.xml
 
-      - name: Upload shipping JAR file
-        uses: actions/upload-artifact@v4
-        with:
-              name: shipping-service
-              path: BE-MS/shipping-service/target/*.jar
+    #  - name: Upload shipping JAR file
+    #    uses: actions/upload-artifact@v4
+    #    with:
+    #          name: shipping-service
+    #          path: BE-MS/shipping-service/target/*.jar
 
-      - uses: actions/download-artifact@v4
-        with:
-          name: shipping-service
-          path: BE-MS/shipping-service
+    #  - uses: actions/download-artifact@v4
+    #    with:
+    #      name: shipping-service
+    #      path: BE-MS/shipping-service
 
       - name: Display structure of downloaded files
         run: ls -l  BE-MS/shipping-service
