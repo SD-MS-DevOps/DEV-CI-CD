@@ -27,18 +27,22 @@ jobs:
       - name: Build orders-service
         working-directory: BE-MS/orders-service
         run: mvn -B package --file pom.xml
-
+      - run: mkdir staging && cp target/*.jar staging
+      
       - name: Upload JAR file
         uses: actions/upload-artifact@v4
         with:
-          name: orders-service
-          path: BE-MS/orders-service/target/*.jar
-          run: ls -l BE-MS/orders-service/target/
+            name: Package
+            path: staging
+            run: ls -l staging
+          #name: orders-service
+          #path: BE-MS/orders-service/target/*.jar
+          #run: ls -l BE-MS/orders-service/target/
 
       - uses: actions/download-artifact@v4
         with:
-          name: orders-service
-          path: BE-MS/orders-service/target
+          name: Package
+          path: staging
 
       #- name: Display structure of downloaded files
       #  run: |
