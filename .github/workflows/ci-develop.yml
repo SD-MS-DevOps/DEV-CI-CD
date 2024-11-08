@@ -37,8 +37,8 @@ jobs:
 
       - uses: actions/download-artifact@v4
         with:
-          name: Package
-          path: staging
+          name: orders-service
+          path: BE-MS/orders-service/
           run: ls -l
 
       #- name: Display structure of downloaded files
