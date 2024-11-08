@@ -73,11 +73,13 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build Container image
-        working-directory: BE-MS/orders-service
-        run: docker build -t orders-service:latest ./BE-MS/orders-service
-      - name: Publish Docker image
-        run: docker push orders-service:latest
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: ./BE-MS/orders-service/
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/orders-service:latest
           
   # payments-service   
        
@@ -101,11 +103,13 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build Container image
-        working-directory: BE-MS/payments-service
-        run: docker build -t payments-service:latest ./BE-MS/payments-service
-      - name: Publish Docker image
-        run: docker push payments-service:latest
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: ./BE-MS/payments-service/
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/payments-service:latest
         
 
   # products-service     
@@ -130,13 +134,13 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build Container image
-        working-directory: BE-MS/products-service
-        run: docker build -t products-service:latest ./BE-MS/products-service
-        
-      - name: Publish Docker image
-        run: docker push products-service:latest
-     
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: ./BE-MS/products-service/
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/products-service:latest
+
 
 
   #shipping-service
@@ -162,11 +166,10 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build Container image
-        working-directory: BE-MS/shipping-service
-        run: docker build -t shipping-service:latest ./BE-MS/shipping-service
-    
-      - name: Publish Docker image
-        run: docker push shipping-service:latest
-        
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: ./BE-MS/shipping-service/
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/shipping-service:latest
 
