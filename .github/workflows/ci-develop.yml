@@ -72,9 +72,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build Container image
-        run: docker build -t ${{ secrets.DOCKER_REPO }}:latest .
+        run: docker build -t ${{ secrets.DOCKER_REPO_ORDERS }}:latest .
       - name: Publish Docker image
-        run: docker push ${{ secrets.DOCKER_REPO }}
+        run: docker push ${{ secrets.DOCKER_REPO_ORDERS }}
           
   # payments-service   
        
