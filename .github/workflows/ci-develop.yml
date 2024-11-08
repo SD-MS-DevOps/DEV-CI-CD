@@ -75,7 +75,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build Container image
         working-directory: BE-MS/orders-service
-        run: docker build -t ${{ secrets.DOCKER_REPO_ORDERS }}:latest .
+        run: docker build -t ${{ secrets.DOCKER_REPO_ORDERS }}:latest ./BE-MS/orders-service
       - name: Publish Docker image
         run: docker push ${{ secrets.DOCKER_REPO_ORDERS }}
           
@@ -103,7 +103,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build Container image
         working-directory: BE-MS/payments-service
-        run: docker build -t ${{ secrets.DOCKER_REPO_PAYMENTS }}:latest .
+        run: docker build -t ${{ secrets.DOCKER_REPO_PAYMENTS }}:latest ./BE-MS/payments-service
       - name: Publish Docker image
         run: docker push ${{ secrets.DOCKER_REPO_PAYMENTS }}
         
@@ -132,7 +132,7 @@ jobs:
 
       - name: Build Container image
         working-directory: BE-MS/products-service
-        run: docker build -t ${{ secrets.DOCKER_REPO_PRODUCTS }}:latest .
+        run: docker build -t ${{ secrets.DOCKER_REPO_PRODUCTS }}:latest ./BE-MS/products-service
         
       - name: Publish Docker image
         run: docker push ${{ secrets.DOCKER_REPO_PRODUCTS }}
@@ -164,7 +164,7 @@ jobs:
 
       - name: Build Container image
         working-directory: BE-MS/shipping-service
-        run: docker build -t ${{ secrets.DOCKER_REPO_SHIPPING }}:latest .
+        run: docker build -t ${{ secrets.DOCKER_REPO_SHIPPING }}:latest ./BE-MS/shipping-service
     
       - name: Publish Docker image
         run: docker push ${{ secrets.DOCKER_REPO_SHIPPING }}
