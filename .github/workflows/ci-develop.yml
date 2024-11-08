@@ -28,12 +28,14 @@ jobs:
             path: ~/.sonar/cache
             key: ${{ runner.os }}-sonar
             restore-keys: ${{ runner.os }}-sonar 
+
       - name: Cache Maven packages
         uses: actions/cache@v4
         with:
             path: ~/.m2
             key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
             restore-keys: ${{ runner.os }}-m2
+
       - name: Build and analicis con sonarcloud
         working-directory: BE-MS/orders-service
         env:
@@ -72,6 +74,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build Container image
+        working-directory: BE-MS/orders-service
         run: docker build -t ${{ secrets.DOCKER_REPO_ORDERS }}:latest .
       - name: Publish Docker image
         run: docker push ${{ secrets.DOCKER_REPO_ORDERS }}
@@ -93,9 +96,17 @@ jobs:
       #    name: jar-file
       #    path: BE-MS/jar-file
 
-      - name: Build Docker image
-        run: docker build -t payments-service:latest .
-        #/BE-MS/payments-service
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build Container image
+        working-directory: BE-MS/payments-service
+        run: docker build -t ${{ secrets.DOCKER_REPO_PAYMENTS }}:latest .
+      - name: Publish Docker image
+        run: docker push ${{ secrets.DOCKER_REPO_PAYMENTS }}
+        
 
   # products-service     
 
@@ -113,9 +124,19 @@ jobs:
     #      name: products-service
     #      path: BE-MS/products-service
 
-      - name: Build Docker image
-        run: docker build -t products-service:latest .
-        #/BE-MS/products-service
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build Container image
+        working-directory: BE-MS/products-service
+        run: docker build -t ${{ secrets.DOCKER_REPO_PRODUCTS }}:latest .
+        
+      - name: Publish Docker image
+        run: docker push ${{ secrets.DOCKER_REPO_PRODUCTS }}
+     
 
 
   #shipping-service
@@ -135,7 +156,17 @@ jobs:
     #      name: shipping-service
     #      path: BE-MS/shipping-service
 
-      - name: Build Docker image
-        run: docker build -t shipping-service:latest .
-        #/BE-MS/shipping-service
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build Container image
+        working-directory: BE-MS/shipping-service
+        run: docker build -t ${{ secrets.DOCKER_REPO_SHIPPING }}:latest .
+    
+      - name: Publish Docker image
+        run: docker push ${{ secrets.DOCKER_REPO_SHIPPING }}
+        
 
