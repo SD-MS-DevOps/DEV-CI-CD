@@ -21,6 +21,24 @@ jobs:
           java-version: '21'
           distribution: 'zulu'
           cache: maven
+      
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v4
+        with:
+            path: ~/.sonar/cache
+            key: ${{ runner.os }}-sonar
+            restore-keys: ${{ runner.os }}-sonar 
+      - name: Cache Maven packages
+        uses: actions/cache@v4
+        with:
+            path: ~/.m2
+            key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+            restore-keys: ${{ runner.os }}-m2
+      - name: Build and analyze
+        env:
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=SD-MS-DevOps_DEV-CI-CD         
 
   #  orders-service
       
@@ -33,14 +51,14 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: orders-service
-          path: BE-MS/orders-service/target/*.jar
-          run: ls -l BE-MS/orders-service/target/
+#          path: BE-MS/orders-service/target/*.jar
+           run: ls -l BE-MS/orders-service/target/
 
       - uses: actions/download-artifact@v4
         with:
           name: orders-service
-          path: BE-MS/orders-service/
-          run: ls -l BE-MS/orders-service/target/
+ #         path: BE-MS/orders-service/
+           run: ls -l BE-MS/orders-service/target/
 
       - name: Display structure of downloaded files
         run: |
