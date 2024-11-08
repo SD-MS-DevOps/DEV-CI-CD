@@ -55,10 +55,10 @@ jobs:
                    
       - run: ls -l BE-MS/orders-service/target/
 
-      - uses: actions/download-artifact@v4
-        with:
-          name: orders-service
-          path: BE-MS/orders-service
+     # - uses: actions/download-artifact@v4
+     #   with:
+     #     name: orders-service
+     #     path: BE-MS/orders-service
          
       - name: Display structure of downloaded files
         run: |
@@ -80,10 +80,10 @@ jobs:
           name: payments-service
           path: BE-MS/payments-service/target/payments-service-example-0.0.1-SNAPSHOT-spring-boot.jar
        
-      - uses: actions/download-artifact@v4
-        with:
-          name: jar-file
-          path: BE-MS/jar-file
+      #- uses: actions/download-artifact@v4
+       # with:
+       #   name: jar-file
+       #   path: BE-MS/jar-file
 
       - name: Display structure of downloaded files
         run: ls -l BE-MS/payments-service
