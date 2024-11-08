@@ -51,7 +51,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: orders-service
-          path: orders-service/target/*.jar
+          path: orders-service/target/orders-service-example-0.0.1-SNAPSHOT-spring-boot.jar
                    
       - run: ls -l BE-MS/orders-service/target/
 
@@ -78,12 +78,12 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: payments-service
-          path: BE-MS/payments-service/target/*.jar
+          path: BE-MS/payments-service/target/payments-service-example-0.0.1-SNAPSHOT-spring-boot.jar
        
       - uses: actions/download-artifact@v4
         with:
-          name: payments-service
-          path: BE-MS/payments-service
+          name: jar-file
+          path: BE-MS/jar-file
 
       - name: Display structure of downloaded files
         run: ls -l BE-MS/payments-service
@@ -101,7 +101,6 @@ jobs:
         with:
             name: products-service
             path: BE-MS/products-service/target/*.jar
-
       - uses: actions/download-artifact@v4
         with:
           name: products-service
