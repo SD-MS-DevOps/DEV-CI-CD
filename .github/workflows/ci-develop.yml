@@ -39,15 +39,13 @@ jobs:
         with:
           name: orders-service
           path: BE-MS/orders-service/
-          run: ls -l
+          #run: ls -l
 
-      #- name: Display structure of downloaded files
-      #  run: |
-      #    ls -l  BE-MS/orders-service
-      #    cp -rf /app/target/*.jar app.jar
+      - name: Display structure of downloaded files
+        run: ls -l  BE-MS/orders-service
 
-     # - name: Build Docker image
-      #  run: docker build -t orders-service:latest ./BE-MS/orders-service
+      - name: Build Docker image
+        run: docker build -t orders-service:latest ./BE-MS/orders-service
           
   # payments-service   
        
@@ -70,7 +68,7 @@ jobs:
         run: ls -l BE-MS/payments-service
 
       - name: Build Docker image
-        run: docker build --build-arg JAR_FILE=payments-service -t payments-service:latest ./BE-MS/payments-service
+        run: docker build -t payments-service:latest ./BE-MS/payments-service
   # products-service     
 
       - name: Build products-service
@@ -92,7 +90,7 @@ jobs:
         run: ls -l  BE-MS/products-service
 
       - name: Build Docker image
-        run: docker build --build-arg JAR_FILE=products-service -t products-service:latest ./BE-MS/products-service
+        run: docker build -t products-service:latest ./BE-MS/products-service
 
 
   #shipping-service
@@ -116,5 +114,5 @@ jobs:
         run: ls -l  BE-MS/shipping-service
 
       - name: Build Docker image
-        run: docker build -build-arg JAR_FILE=shipping-service -t shipping-service:latest ./BE-MS/shipping-service
+        run: docker build -t shipping-service:latest ./BE-MS/shipping-service
 
