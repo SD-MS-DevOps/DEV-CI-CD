@@ -33,17 +33,20 @@ jobs:
         with:
           name: orders-service
           path: BE-MS/orders-service/target/*.jar
+          run: ls -l BE-MS/orders-service/target/
 
       - uses: actions/download-artifact@v4
         with:
           name: orders-service
-          path: BE-MS/orders-service
+          path: BE-MS/orders-service/target
 
-      - name: Display structure of downloaded files
-        run: ls -l  BE-MS/orders-service
+      #- name: Display structure of downloaded files
+      #  run: |
+      #    ls -l  BE-MS/orders-service
+      #    cp -rf /app/target/*.jar app.jar
 
       - name: Build Docker image
-        run: docker build --build-arg JAR_FILE=orders-service -t orders-service:latest ./BE-MS/orders-service
+        run: docker build -t orders-service:latest ./BE-MS/orders-service
           
   # payments-service   
        
