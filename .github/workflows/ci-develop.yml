@@ -45,8 +45,7 @@ jobs:
       
       - name: Build orders-service
         working-directory: BE-MS/orders-service
-        #run: mvn -B package --file pom.xml
-        run: mvn clean package --file pom.xml
+        run: mvn -B package --file pom.xml
 
       - name: Upload JAR file
         uses: actions/upload-artifact@v4
@@ -59,6 +58,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: orders-service
+          path: BE-MS/orders-service
          
       - name: Display structure of downloaded files
         run: |
@@ -83,6 +83,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: payments-service
+          path: BE-MS/payments-service
 
       - name: Display structure of downloaded files
         run: ls -l BE-MS/payments-service
@@ -104,6 +105,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: products-service
+          path: BE-MS/products-service
 
       - name: Display structure of downloaded files
         run: ls -l  BE-MS/products-service
@@ -127,7 +129,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: shipping-service
-          #path: BE-MS/shipping-service
+          path: BE-MS/shipping-service
 
       - name: Display structure of downloaded files
         run: ls -l  BE-MS/shipping-service

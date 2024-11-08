@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 class OrdersServiceExampleApplicationTests {
 
 	@Test
-	void contextLoads() {
+	void contextLoads() { // el método está vacío porque es ejemplo
 	}
 
 }
