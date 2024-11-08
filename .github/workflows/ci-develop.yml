@@ -52,13 +52,14 @@ jobs:
         with:
           name: orders-service
           path: orders-service-example/target/  
-        run: ls -l BE-MS/orders-service/target/
+           
+      - run: ls -l BE-MS/orders-service/target/
 
       - uses: actions/download-artifact@v4
         with:
           name: orders-service
- #         path: BE-MS/orders-service/
-           run: ls -l BE-MS/orders-service/target/
+          path: BE-MS/orders-service/
+      - run: ls -l BE-MS/orders-service/target/
 
       - name: Display structure of downloaded files
         run: |
