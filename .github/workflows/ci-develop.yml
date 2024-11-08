@@ -39,7 +39,7 @@ jobs:
         with:
           name: orders-service
           path: BE-MS/orders-service/
-          #run: ls -l
+          run: ls -l BE-MS/orders-service/target/
 
       - name: Display structure of downloaded files
         run: ls -l  BE-MS/orders-service
